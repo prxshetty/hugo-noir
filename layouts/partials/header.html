@@ -35,11 +35,9 @@
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex flex-wrap justify-center items-center gap-4 md:gap-6">
                 <!-- <a href="{{ .Site.BaseURL }}" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if .IsHome }}text-white font-semibold{{ end }}">Home</a> -->
-                <a href="{{ .Site.BaseURL }}about/" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/about/" }}text-white font-semibold{{ end }}">About</a>
-                <a href="{{ .Site.BaseURL }}experience/" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/experience/" }}text-white font-semibold{{ end }}">Experience</a>
-                <a href="{{ .Site.BaseURL }}projects/" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/projects/" }}text-white font-semibold{{ end }}">Projects</a>
-                <a href="{{ .Site.BaseURL }}blogs/" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/blogs/" }}text-white font-semibold{{ end }}">Blog</a>
-                <a href="{{ .Site.BaseURL }}contact/" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/contact/" }}text-white font-semibold{{ end }}">Contact</a>
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL | absURL }}" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink .URL }}text-white font-semibold{{ end }}">{{ .Name }}</a>
+                {{ end }}
             </nav>
             <div class="hidden md:flex justify-end">
                 <div class="flex items-center">
@@ -62,11 +60,9 @@
                 </button>
             </div>
             <nav class="flex flex-col p-6 space-y-4">
-                <a href="{{ .Site.BaseURL }}about/" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/about/" }}text-white font-semibold{{ end }}">About</a>
-                <a href="{{ .Site.BaseURL }}experience/" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/experience/" }}text-white font-semibold{{ end }}">Experience</a>
-                <a href="{{ .Site.BaseURL }}projects/" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/projects/" }}text-white font-semibold{{ end }}">Projects</a>
-                <a href="{{ .Site.BaseURL }}blogs/" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/blogs/" }}text-white font-semibold{{ end }}">Blog</a>
-                <a href="{{ .Site.BaseURL }}contact/" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink "/contact/" }}text-white font-semibold{{ end }}">Contact</a>
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL | absURL }}" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink .URL }}text-white font-semibold{{ end }}">{{ .Name }}</a>
+                {{ end }}
             </nav>
             <div class="mt-auto p-6 border-t border-gray-800">
                 <div class="flex items-center justify-center">
