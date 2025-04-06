@@ -1,7 +1,7 @@
 baseURL = "https://johndoe.dev"
 languageCode = 'en-us'
 title = 'John Doe'
-theme = 'doe-minimalistic'
+theme = 'hugo-noir'
 
 # URL handling
 relativeURLs = true
