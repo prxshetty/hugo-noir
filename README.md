@@ -118,7 +118,7 @@ theme = "hugo-noir"
 
 ## Configuration ⚙️
 
-This theme supports a variety of configuration options in your `hugo.toml` (or `config.toml`) file. Below is an example configuration with explanations:
+This theme supports a variety of configuration options in your `hugo.toml` (or `config.toml`) file. An example `hugo.toml` configuration can be found in `exampleSite/hugo.toml`. Below is an example configuration with explanations:
 
 ### Basic Configuration
 
