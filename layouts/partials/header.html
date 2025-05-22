@@ -16,17 +16,55 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
         }
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .language-switcher-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            cursor: pointer;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background-color: var(--bg-secondary);
+            min-width: 120px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .language-switcher:hover .language-dropdown {
+            display: block;
+        }
+        .language-dropdown a {
+            padding: 0.75rem 1rem;
+            display: block;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .language-dropdown a:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        .dark .language-dropdown a:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+        .language-active {
+            font-weight: 600;
+        }
     </style>
 </head>
 <header class="py-6 relative">
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div class="flex justify-between items-center">
-                <a href="{{ .Site.BaseURL }}" class="text-xl font-bold text-white hover:text-gray-300 transition-colors duration-300">
+                <a href="{{ .Site.BaseURL }}" class="text-xl font-bold text-text-primary-light dark:text-text-primary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-300">
                     {{ site.Params.name }}
                 </a>
                 <!-- Hamburger menu button for mobile -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <button id="mobile-menu-button" class="md:hidden text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -34,40 +72,103 @@
             </div>            
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex flex-wrap justify-center items-center gap-4 md:gap-6">
-                <!-- <a href="{{ .Site.BaseURL }}" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if .IsHome }}text-white font-semibold{{ end }}">Home</a> -->
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL | absURL }}" class="inline-block text-lg text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink .URL }}text-white font-semibold{{ end }}">{{ .Name }}</a>
+                <a href="{{ .URL | absURL }}" class="inline-block text-lg text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 {{ if or ($.Page.IsMenuCurrent "main" .) ($.Page.HasMenuCurrent "main" .) }}text-accent-light dark:text-accent-dark font-semibold{{ end }}">{{ .Name }}</a>
                 {{ end }}
             </nav>
-            <div class="hidden md:flex justify-end">
+            <div class="hidden md:flex justify-end items-center">
                 <div class="flex items-center">
-                    <span class="text-lg text-gray-300 mr-2">Local Time:</span>
-                    <div id="local-time" class="text-lg text-gray-300"></div>
+                    <span class="text-lg text-text-secondary-light dark:text-text-secondary-dark mr-2">{{ T "localTimeLabel" }}</span>
+                    <div id="local-time" class="text-lg text-text-secondary-light dark:text-text-secondary-dark"></div>
                 </div>
+                <!-- Language Switcher - Desktop -->
+                <div class="language-switcher ml-4">
+                    <div class="language-switcher-btn text-lg text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 p-2 rounded-md">
+                        {{ if eq .Language.Lang "en" }}EN{{ else if eq .Language.Lang "es" }}ES{{ else if eq .Language.Lang "fr" }}FR{{ end }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="language-dropdown">
+                        {{ range .Site.Languages }}
+                            {{ $translation := "" }}
+                            {{ $foundTranslations := where $.Page.Translations "Lang" .Lang }}
+                            {{ if $foundTranslations }}
+                                {{ $translation = index $foundTranslations 0 }}
+                            {{ end }}
+                            {{ $isCurrentLang := eq .Lang $.Language.Lang }}
+                            <a href="{{ if $translation }}{{ $translation.Permalink }}{{ else }}{{ .Lang | absLangURL }}{{ end }}" 
+                               class="{{ if $isCurrentLang }}language-active{{ end }} text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300">
+                                {{ .LanguageName }}
+                            </a>
+                        {{ end }}
+                    </div>
+                </div>
+                <button id="theme-toggle-button-desktop" class="ml-4 inline-block text-lg text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 p-2 rounded-md">
+                  <svg id="theme-toggle-dark-icon-desktop" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+                    <path d="M21.7519 15.0021C20.597 15.484 19.3296 15.7501 18 15.7501C12.6152 15.7501 8.25 11.3849 8.25 6.00011C8.25 4.67052 8.51614 3.40308 8.99806 2.24817C5.47566 3.71798 3 7.19493 3 11.2501C3 16.6349 7.36522 21.0001 12.75 21.0001C16.8052 21.0001 20.2821 18.5245 21.7519 15.0021Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg id="theme-toggle-light-icon-desktop" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="w-5 h-5 hidden">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
+                  </svg>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Mobile Navigation Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden transition-all duration-300">
+    <div id="mobile-menu" class="fixed inset-0 bg-bg-secondary-light dark:bg-bg-secondary-dark z-50 hidden transition-all duration-300 backdrop-blur-2xl">
         <div class="flex flex-col h-full">
-            <div class="flex justify-between items-center p-6 border-b border-gray-800">
-                <span class="text-xl font-bold text-white">Menu</span>
-                <button id="mobile-menu-close" class="text-gray-300 hover:text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
+            <div class="flex justify-between items-center p-6">
+                <span class="text-xl font-bold text-text-primary-light dark:text-text-primary-dark">{{ T "menuTitle" }}</span>
+                <div class="flex items-center gap-4">
+                    <!-- Language Switcher - Mobile -->
+                    <div class="language-switcher">
+                        <div class="language-switcher-btn text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 flex items-center p-2 rounded-md">
+                            {{ if eq .Language.Lang "en" }}EN{{ else if eq .Language.Lang "es" }}ES{{ else if eq .Language.Lang "fr" }}FR{{ end }}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </div>
+                        <div class="language-dropdown">
+                            {{ range .Site.Languages }}
+                                {{ $translation := "" }}
+                                {{ $foundTranslationsMobile := where $.Page.Translations "Lang" .Lang }}
+                                {{ if $foundTranslationsMobile }}
+                                    {{ $translation = index $foundTranslationsMobile 0 }}
+                                {{ end }}
+                                {{ $isCurrentLang := eq .Lang $.Language.Lang }}
+                                <a href="{{ if $translation }}{{ $translation.Permalink }}{{ else }}{{ .Lang | absLangURL }}{{ end }}" 
+                                   class="{{ if $isCurrentLang }}language-active{{ end }} text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300">
+                                    {{ .LanguageName }}
+                                </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                    <button id="theme-toggle-button-mobile" class="text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 flex items-center p-2 rounded-md">
+                      <svg id="theme-toggle-dark-icon-mobile" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+                        <path d="M21.7519 15.0021C20.597 15.484 19.3296 15.7501 18 15.7501C12.6152 15.7501 8.25 11.3849 8.25 6.00011C8.25 4.67052 8.51614 3.40308 8.99806 2.24817C5.47566 3.71798 3 7.19493 3 11.2501C3 16.6349 7.36522 21.0001 12.75 21.0001C16.8052 21.0001 20.2821 18.5245 21.7519 15.0021Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <svg id="theme-toggle-light-icon-mobile" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="w-5 h-5 hidden">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
+                      </svg>
+                    </button>
+                    <button id="mobile-menu-close" class="text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <nav class="flex flex-col p-6 space-y-4">
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL | absURL }}" class="text-xl text-gray-300 hover:text-white transition-colors duration-300 {{ if eq $currentPage.RelPermalink .URL }}text-white font-semibold{{ end }}">{{ .Name }}</a>
+                <a href="{{ .URL | absURL }}" class="text-xl text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 {{ if or ($.Page.IsMenuCurrent "main" .) ($.Page.HasMenuCurrent "main" .) }}text-accent-light dark:text-accent-dark font-semibold{{ end }}" data-menu-link>{{ .Name }}</a>
                 {{ end }}
             </nav>
-            <div class="mt-auto p-6 border-t border-gray-800">
+            <div class="mt-auto p-6">
                 <div class="flex items-center justify-center">
-                    <span class="text-lg text-gray-300 mr-2">Local Time:</span>
-                    <div id="mobile-local-time" class="text-lg text-gray-300"></div>
+                    <span class="text-lg text-text-secondary-light dark:text-text-secondary-dark mr-2">{{ T "localTimeLabel" }}</span>
+                    <div id="mobile-local-time" class="text-lg text-text-secondary-light dark:text-text-secondary-dark"></div>
                 </div>
             </div>
         </div>
@@ -93,64 +194,111 @@
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
+    const menuLinks = document.querySelectorAll('[data-menu-link]');
 
-    function toggleMobileMenu() {
-        const isHidden = mobileMenu.classList.contains('hidden');
-        if (isHidden) {
-            mobileMenu.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-        } else {
-            mobileMenu.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
+    function openMobileMenu() {
+        mobileMenu.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
     }
 
-    mobileMenuButton.addEventListener('click', toggleMobileMenu);
-    mobileMenuClose.addEventListener('click', toggleMobileMenu);
+    function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    mobileMenuButton.addEventListener('click', openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
 
     // Close menu when clicking on a link
-    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            toggleMobileMenu();
-        });
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
     });
 
-    // Only try to access theme toggle elements if they exist
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    if (themeToggleBtn) {
-        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    // Theme toggle functionality
+    const themeToggleBtnDesktop = document.getElementById('theme-toggle-button-desktop');
+    const themeToggleDarkIconDesktop = document.getElementById('theme-toggle-dark-icon-desktop');
+    const themeToggleLightIconDesktop = document.getElementById('theme-toggle-light-icon-desktop');
 
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
-            themeToggleDarkIcon.classList.add('hidden');
-        } else {
-            themeToggleLightIcon.classList.add('hidden');
-            themeToggleDarkIcon.classList.remove('hidden');
-        }
+    const themeToggleBtnMobile = document.getElementById('theme-toggle-button-mobile');
+    const themeToggleDarkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+    const themeToggleLightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
 
-        themeToggleBtn.addEventListener('click', function() {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
+    // Function to update icons based on theme
+    function updateIcons(isDarkMode) {
+        if (themeToggleDarkIconDesktop && themeToggleLightIconDesktop) {
+            if (isDarkMode) {
+                themeToggleLightIconDesktop.classList.remove('hidden');
+                themeToggleDarkIconDesktop.classList.add('hidden');
             } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
+                themeToggleLightIconDesktop.classList.add('hidden');
+                themeToggleDarkIconDesktop.classList.remove('hidden');
             }
-        });
+        }
+        if (themeToggleDarkIconMobile && themeToggleLightIconMobile) {
+            if (isDarkMode) {
+                themeToggleLightIconMobile.classList.remove('hidden');
+                themeToggleDarkIconMobile.classList.add('hidden');
+            } else {
+                themeToggleLightIconMobile.classList.add('hidden');
+                themeToggleDarkIconMobile.classList.remove('hidden');
+            }
+        }
     }
+
+    // Function to set the theme (dark or light)
+    function applyTheme(isDarkMode) {
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        }
+        updateIcons(isDarkMode);
+    }
+
+    // Initialize theme based on localStorage or prefers-color-scheme
+    let initialIsDarkMode = false;
+    if (localStorage.getItem('color-theme') === 'dark' || 
+        (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        initialIsDarkMode = true;
+    }
+    // Apply the initial theme. If it's dark, add the class to <html> immediately to prevent FOUC.
+    if (initialIsDarkMode && !document.documentElement.classList.contains('dark')) {
+         document.documentElement.classList.add('dark');
+    }
+    applyTheme(initialIsDarkMode); // This will set localStorage, icons, and ensure class is correct.
+
+    // Event listener for theme toggle buttons
+    function themeToggleClickHandler() {
+        const isCurrentlyDark = document.documentElement.classList.contains('dark');
+        applyTheme(!isCurrentlyDark); // Toggle to the opposite theme
+        
+        // If toggling from mobile menu, close the menu
+        if (window.innerWidth < 768) {
+            closeMobileMenu();
+        }
+    }
+
+    if (themeToggleBtnDesktop) {
+        themeToggleBtnDesktop.addEventListener('click', themeToggleClickHandler);
+    }
+    if (themeToggleBtnMobile) {
+        themeToggleBtnMobile.addEventListener('click', themeToggleClickHandler);
+    }
+    
+    // Add click event listener to the mobile menu background
+    mobileMenu.addEventListener('click', function(event) {
+        // Only close if clicking directly on the background (not on menu content)
+        if (event.target === mobileMenu) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Handle escape key to close the menu
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+            closeMobileMenu();
+        }
+    });
 </script> 

@@ -1,19 +1,25 @@
 {{ define "main" }}
 <div class="w-full md:w-3/4 lg:w-1/2 mx-auto px-4 py-12">
-    <h1 class="text-5xl font-bold mb-12">{{ .Title }}</h1>
+    <h1 class="text-5xl font-bold mb-12 text-text-primary-light dark:text-text-primary-dark">{{ .Title }}</h1>
     
     <div class="space-y-12 max-w-3xl mx-auto">
-        {{ range .Site.Params.blogs }}
+        {{ $blogsData := index site.Data .Language.Lang "blogs" }}
+        {{ range $blogsData.blogs }}
         <div class="group">
-            <p class="text-gray-400 text-sm mb-2">{{ .date }}</p>
+            <p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mb-2">{{ .date }}</p>
             <a href="{{ .link }}" class="block" target="_blank">
-                <h3 class="text-xl font-medium text-blue-400 hover:text-blue-300 transition-colors duration-200 mb-3">{{ .title }}</h3>
+                <h3 class="inline-flex items-center text-xl font-medium text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-200 mb-3">
+                    {{ .title }}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 opacity-70 group-hover:opacity-100 transition-opacity duration-200">
+                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                    </svg>
+                </h3>
             </a>
-            <p class="text-gray-400 mb-4">{{ .summary }}</p>
+            <p class="text-text-secondary-light dark:text-text-secondary-dark mb-4">{{ .summary }}</p>
             <div class="flex flex-wrap gap-2">
                 {{ range .tags }}
                 {{ if ne . "" }}
-                <span class="px-2 py-1 text-xs bg-[#121212] text-gray-100 border border-gray-800 rounded-md transition-all duration-300">{{ . }}</span>
+                <span class="px-2 py-1 text-xs bg-bg-primary-light dark:bg-bg-tertiary-dark text-text-secondary-light dark:text-text-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-md transition-all duration-300">{{ . }}</span>
                 {{ end }}
                 {{ end }}
             </div>

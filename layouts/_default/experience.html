@@ -1,9 +1,9 @@
 {{ define "main" }}
 <div class="max-w-4xl mx-auto px-4 py-12">
-    <h1 class="text-5xl font-bold mb-3 text-gray-100">{{ .Title }}</h1>
-    <div class="mb-12 bg-[#121212] p-8 rounded-lg">
+    <h1 class="text-5xl font-bold mb-3 text-text-primary-light dark:text-text-primary-dark">{{ .Title }}</h1>
+    <div class="mb-12 bg-bg-primary-light dark:bg-bg-secondary-dark p-8 rounded-lg border border-border-primary-light dark:border-border-primary-dark">
         <div class="intro-section">
-            <div class="text-gray-300 text-3xl prose prose-invert prose-l max-w-none">
+            <div class="text-text-secondary-light dark:text-text-secondary-dark text-3xl prose prose-invert prose-l max-w-none">
                 {{ .Content }}
             </div>
             <div class="mt-8 text-sl flex flex-wrap gap-4">
@@ -28,20 +28,21 @@
         </div>
     </div>
     <div class="space-y-8">
-        {{ with .Site.Params.experience }}
+        {{ $experienceData := index site.Data .Language.Lang "experience" }}
+        {{ with $experienceData.experience }}
             {{ range . }}
-            <div class="group relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:w-[2px] before:h-full before:bg-gray-700 before:rounded-full">
-                <div class="absolute -left-1.5 top-0 w-2 h-2 bg-gray-700 rounded-full"></div>
-                <div class="p-6 rounded-lg bg-[#121212] transition-all duration-300">
+            <div class="group relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:w-[2px] before:h-full before:bg-border-secondary-light dark:before:bg-border-secondary-dark before:rounded-full">
+                <div class="absolute -left-1.5 top-0 w-2 h-2 bg-border-secondary-light dark:bg-border-secondary-dark rounded-full"></div>
+                <div class="p-6 rounded-lg bg-bg-primary-light dark:bg-bg-secondary-dark transition-all duration-300 border border-border-primary-light dark:border-border-primary-dark">
                     <div class="flex-grow">
                         {{ if .company }}
-                            <div class="text-gray-400 text-xl">{{ .company }}</div>
+                            <div class="text-text-secondary-light dark:text-text-secondary-dark text-xl">{{ .company }}</div>
                         {{ end }}
                         <div class="flex flex-col md:flex-row md:items-center gap-1 mb-1">
-                            <h3 class="text-3xl font-semibold text-gray-100">{{ .role }}</h3>
+                            <h3 class="text-3xl font-semibold text-text-primary-light dark:text-text-primary-dark">{{ .role }}</h3>
                         </div>
-                        <div class="text-gray-400 mb-4 text-sm">
-                            {{ .period }}
+                        <div class="text-text-secondary-light dark:text-text-secondary-dark mb-4 text-sm">
+                            {{ .period }}{{ if .country }} • {{ .country }}{{ end }}
                         </div>
                         <!-- {{ if .description }}
                         <p class="text-gray-300 mb-4 leading-relaxed text-lg">{{ .description }}</p>
@@ -49,10 +50,10 @@
 
                         {{ if .responsibilities }}
                         <div class="mt-4">
-                            <h4 class="text-lg font-medium text-gray-200 mb-3">Key Responsibilities:</h4>
+                            <h4 class="text-lg font-medium text-text-primary-light dark:text-text-primary-dark mb-3">Key Responsibilities:</h4>
                             <ul class="list-none space-y-2">
                                 {{ range .responsibilities }}
-                                <li class="text-gray-300 text-lg">
+                                <li class="text-text-secondary-light dark:text-text-secondary-dark text-lg">
                                     {{ . }}
                                 </li>
                                 {{ end }}
@@ -63,18 +64,18 @@
                         {{ if .technologies }}
                         <div class="mt-4 flex flex-wrap gap-2">
                             {{ range .technologies }}
-                            <span class="px-3 py-1 text-sm bg-gray-800 text-gray-300 rounded-full">{{ . }}</span>
+                            <span class="px-3 py-1 text-sm bg-bg-primary-light dark:bg-bg-tertiary-dark text-text-secondary-light dark:text-text-secondary-dark rounded-full">{{ . }}</span>
                             {{ end }}
                         </div>
                         {{ end }}                        
                         {{ if eq .company "GitHub" }}
                         <div class="mt-4">
-                            <a href="https://github.com/{{ .github_username }}" 
-                               class="github-link inline-flex items-center gap-2 text-gray-400 hover:text-gray-200 transition-colors duration-300 relative">
+                            <a href="https://github.com/prxshetty" 
+                               class="github-link inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300 relative">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
-                                <span class="text-sm">@{{ .github_username }}</span>
+                                <span class="text-sm">@prxshetty</span>
                             </a>
                         </div>
                         {{ end }}
@@ -83,7 +84,7 @@
             </div>
             {{ end }}
         {{ else }}
-            <div class="text-gray-300 p-6 bg-[#121212] rounded-lg">
+            <div class="text-text-secondary-light dark:text-text-secondary-dark p-6 bg-bg-primary-light dark:bg-bg-secondary-dark rounded-lg border border-border-primary-light dark:border-border-primary-dark">
                 <p class="text-center">No experience data found. Please add some experience entries to your site configuration.</p>
             </div>
         {{ end }}
@@ -93,31 +94,63 @@
 
 <style>
     .prose {
-        @apply text-gray-300;
+        color: #4b5563; /* text-secondary-light */
         font-size: 1.25rem;
     }
+    html.dark .prose {
+        color: #9ca3af; /* text-secondary-dark */
+    }
     .prose h1 {
-        @apply text-4xl font-bold mb-8 text-gray-100;
+        @apply text-4xl font-bold mb-8;
+        color: #1f2937; /* text-primary-light */
+    }
+    html.dark .prose h1 {
+        color: #f3f4f6; /* text-primary-dark */
     }
     .prose h2 {
-        @apply text-2xl font-semibold mt-8 mb-4 text-gray-100;
+        @apply text-2xl font-semibold mt-8 mb-4;
+        color: #1f2937; /* text-primary-light */
+    }
+    html.dark .prose h2 {
+        color: #f3f4f6; /* text-primary-dark */
     }
     .prose p {
-        @apply text-gray-300 mb-6;
+        color: #4b5563; /* text-secondary-light */
+        margin-bottom: 1.5rem; /* mb-6 */
         line-height: 1.9;
         font-size: 1.125rem;
+    }
+    html.dark .prose p {
+        color: #9ca3af; /* text-secondary-dark */
     }
     .prose p + p {
         margin-top: 2rem;
     }
     .prose ul {
-        @apply text-gray-300 list-disc list-inside space-y-2;
+        @apply list-disc list-inside space-y-2;
+        color: #4b5563; /* text-secondary-light */
+    }
+    html.dark .prose ul {
+        color: #9ca3af; /* text-secondary-dark */
     }
     .prose li {
-        @apply text-gray-300;
+        color: #4b5563; /* text-secondary-light */
+    }
+    html.dark .prose li {
+        color: #9ca3af; /* text-secondary-dark */
     }
     .prose a {
-        @apply text-blue-400 hover:text-blue-300 transition-colors duration-300;
+        @apply transition-colors duration-300;
+        color: #0284c7; /* accent-light */
+    }
+    .prose a:hover {
+        color: #0369a1; /* accent-light-hover */
+    }
+    html.dark .prose a {
+        color: #0ea5e9; /* accent-dark */
+    }
+    html.dark .prose a:hover {
+        color: #38bdf8; /* accent-dark-hover */
     }
     
     .intro-section {
@@ -132,24 +165,28 @@
         transform: translateX(-50%);
         width: 100%;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        background: linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.5), transparent); /* border-secondary-light with alpha */
     }
     
+    .intro-section::after {
+        background: linear-gradient(90deg, transparent, rgba(107, 114, 128, 0.5), transparent); /* border-secondary-dark with alpha */
+    }
+
     .stat-box {
-        @apply bg-[#1a1a1a] p-4 rounded-lg border border-gray-800 flex-1 min-w-[120px] text-center transition-all duration-300;
+        @apply bg-bg-primary-light dark:bg-bg-tertiary-dark p-4 rounded-lg border border-border-primary-light dark:border-border-primary-dark flex-1 min-w-[120px] text-center transition-all duration-300;
     }
     
     .stat-box:hover {
-        @apply border-blue-400 bg-[#1e1e1e];
+        @apply border-accent-light dark:border-accent-dark bg-bg-primary-light dark:bg-bg-tertiary-dark;
         transform: translateY(-2px);
     }
     
     .stat-number {
-        @apply text-3xl font-bold text-blue-400 mb-1;
+        @apply text-3xl font-bold text-accent-light dark:text-accent-dark mb-1;
     }
     
     .stat-label {
-        @apply text-sm text-gray-400;
+        @apply text-sm text-text-secondary-light dark:text-text-secondary-dark;
     }
     
     .github-link {
@@ -165,12 +202,15 @@
         height: 1px;
         bottom: -2px;
         left: 0;
-        background-color: #ffffff;
+        background-color: #0284c7; /* accent-light */
         transition: width 0.3s ease-in-out;
     }
     
     .github-link:hover::after {
         width: 100%;
+    }
+    html.dark .github-link::after {
+        background-color: #0ea5e9; /* accent-dark */
     }
 </style>
 {{ end }} 

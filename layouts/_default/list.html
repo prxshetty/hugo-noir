@@ -1,17 +1,17 @@
 {{ define "main" }}
 <div class="container mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold mb-8">{{ .Title }}</h1>
+    <h1 class="text-4xl font-bold mb-8 text-text-primary-light dark:text-text-primary-dark">{{ .Title }}</h1>
     <div class="space-y-6">
         {{ range .Pages }}
-        <article class="border border-gray-700 rounded-lg p-6 bg-[#1a1a1a]">
+        <article class="border border-border-primary-light dark:border-border-primary-dark rounded-lg p-6 bg-white dark:bg-neutral-800">
             <h2 class="text-2xl font-semibold mb-2">
-                <a href="{{ .RelPermalink }}" class="hover:text-gray-300">{{ .Title }}</a>
+                <a href="{{ .RelPermalink }}" class="text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark">{{ .Title }}</a>
             </h2>
             {{ if .Description }}
-            <p class="text-gray-400">{{ .Description }}</p>
+            <p class="text-text-secondary-light dark:text-text-secondary-dark">{{ .Description }}</p>
             {{ end }}
             {{ if .Date }}
-            <time class="text-sm text-gray-500">{{ .Date.Format "January 2, 2006" }}</time>
+            <time class="text-sm text-text-secondary-light dark:text-text-secondary-dark">{{ .Date.Format "January 2, 2006" }}</time>
             {{ end }}
         </article>
         {{ end }}

@@ -1,0 +1,160 @@
+baseURL = "https://example.com"
+languageCode = 'en-us'
+title = 'John Doe - Portfolio & Blog'
+theme = 'hugo-noir' # This is the theme you are using
+
+# URL handling
+relativeURLs = true
+canonifyURLs = true
+
+# Multilingual configuration
+# If you want to use multiple languages, uncomment and configure the [languages] section below.
+# Ensure you have corresponding content directories (e.g., content/en, content/es)
+# and i18n files in themes/hugo-noir/i18n/ for each language.
+# Also, create data files like data/en/author.yaml, data/es/author.yaml for language-specific author info.
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "John Doe - Portfolio & Blog"
+    weight = 1
+    contentDir = "content/en"
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        name = "About"
+        pageRef = "/about" # Corresponds to content/en/about.md or content/en/about/_index.md
+        weight = 1
+      [[languages.en.menu.main]]
+        name = "Experience"
+        pageRef = "/experience"
+        weight = 2
+      [[languages.en.menu.main]]
+        name = "Projects"
+        pageRef = "/projects"
+        weight = 3
+      [[languages.en.menu.main]]
+        name = "Blog"
+        pageRef = "/blogs" # Assumes a section named 'blogs'
+        weight = 4
+      [[languages.en.menu.main]]
+        name = "Contact"
+        pageRef = "/contact"
+        weight = 5
+
+  # Example for Spanish (es) - uncomment and adapt if needed
+  # [languages.es]
+  #   languageName = "Español"
+  #   title = "John Doe - Portafolio y Blog"
+  #   weight = 2
+  #   contentDir = "content/es"
+  #   [languages.es.menu]
+  #     [[languages.es.menu.main]]
+  #       name = "Sobre Mí"
+  #       pageRef = "/about"
+  #       weight = 1
+  #     [[languages.es.menu.main]]
+  #       name = "Experiencia"
+  #       pageRef = "/experience"
+  #       weight = 2
+  #     [[languages.es.menu.main]]
+  #       name = "Proyectos"
+  #       pageRef = "/projects"
+  #       weight = 3
+  #     [[languages.es.menu.main]]
+  #       name = "Blog"
+  #       pageRef = "/blogs"
+  #       weight = 4
+  #     [[languages.es.menu.main]]
+  #       name = "Contacto"
+  #       pageRef = "/contact"
+  #       weight = 5
+
+  # Example for French (fr) - uncomment and adapt if needed
+  # [languages.fr]
+  #   languageName = "Français"
+  #   title = "John Doe - Portfolio et Blog"
+  #   weight = 3
+  #   contentDir = "content/fr"
+  #   [languages.fr.menu]
+  #     [[languages.fr.menu.main]]
+  #       name = "À Propos"
+  #       pageRef = "/about"
+  #       weight = 1
+  #     # ... other French menu items
+
+# Taxonomy configuration
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  # Basic profile information - common across languages
+  # This is used by the theme for the author name in the footer, social links, etc.
+  name = "John Doe"
+  profile_image = "/images/profile_placeholder.jpg" # Place in your site's static/images/ directory
+  # Social and contact information
+  email = "john.doe@example.com"
+  github = "https://github.com/johndoe"
+  github_username = "johndoe"
+  linkedin = "https://linkedin.com/in/johndoe"
+  linkedin_username = "johndoe"
+  twitter = "https://twitter.com/johndoe"
+  twitter_username = "johndoe"
+  # Add other social links as needed by the theme or your content
+  # discord = "johndoe#1234"
+  # medium = "https://medium.com/@johndoe"
+  # leetcode = "https://leetcode.com/johndoe"
+  # monkeytype = "https://monkeytype.com/profile/johndoe"
+  # kaggle = "https://www.kaggle.com/johndoe"
+  # instagram = "https://instagram.com/johndoe"
+
+  # Example for adding honors/awards (optional, adapt to theme features)
+  [[params.honors]]
+    institution = "Lorem University"
+    title = "Summa Cum Laude"
+    date = "May 2020"
+
+  [[params.honors]]
+    institution = "Ipsum Institute"
+    title = "Best Project Award"
+    date = "December 2019"
+
+  # Example for certifications (optional, adapt to theme features)
+  [[params.certifications]]
+    title = "Professional Widget Certification"
+    company = "Widgets Inc."
+    date = "Valid until Jan 2025"
+    url = "https://example.com/certification/123"
+
+  # Example for voluntary work (optional, adapt to theme features)
+  [[params.voluntary]]
+    role = "Community Helper"
+    organization = "Local Charity Group"
+    period = "2021 - Present"
+    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+# Main menu (used as a fallback if language-specific menus are not fully defined or if not using multilingual features)
+# For multilingual sites, it's generally better to define menus within each language block as shown above.
+[menu]
+  [[menu.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 1
+  [[menu.main]]
+    name = "Experience"
+    pageRef = "/experience"
+    weight = 2
+  [[menu.main]]
+    name = "Projects"
+    pageRef = "/projects"
+    weight = 3
+  [[menu.main]]
+    name = "Blog"
+    pageRef = "/blogs"
+    weight = 4
+  [[menu.main]]
+    name = "Contact Me" # Note: "Contact" is used in language-specific menus above for consistency
+    pageRef = "/contact"
+    weight = 5 

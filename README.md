@@ -1,401 +1,315 @@
-<h1 align=center>Hugo Dark Noir | <a href="https://pranamshetty.dev" rel="nofollow">Demo</a></h1>
+# Hugo Noir Theme
 
-<h4 align=center>🌑 Dark | 🔍 Minimalist | 📱 Responsive | ⚡ Fast</h4>
-<br>
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/prxshetty/hugo-noir)](https://github.com/prxshetty/hugo-noir/releases/latest)
+[![View Changelog](https://img.shields.io/badge/changelog-view-blue)](CHANGELOG.md)
 
-> Dark Noir is a clean, minimalistic theme for Hugo with a focus on readability and simplicity.
+![Hugo Noir Screenshot](https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/screenshot.png)
 
-[![Minimum Hugo Version](https://img.shields.io/static/v1?label=min-HUGO-version&message=>=v0.92.0&color=blue&logo=hugo)](https://github.com/gohugoio/hugo/releases/tag/v0.92.0)
-[![GitHub](https://img.shields.io/github/license/prxshetty/hugo-noir)](https://github.com/prxshetty/hugo-noir/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/prxshetty/hugo-noir?style=social)](https://github.com/prxshetty/hugo-noir/stargazers)
-[![Hugo Themes](https://img.shields.io/badge/Hugo--Themes-@Dark_Noir-blue)](https://themes.gohugo.io/themes/hugo-noir/)
+A clean, minimalistic theme for Hugo with a focus on readability, simplicity, and multilingual support.
 
----
+## Features
 
-## Screenshots 📸
+- Responsive design
+- Built with Tailwind CSS
+- Clean and minimalist aesthetic
+- Light & Dark mode support (manual toggle and OS-aware)
+- Fast loading times
+- SEO-friendly
+- Blog-ready
+- Multilingual support (En, Es, Fr configured by default)
+- Enhanced mobile navigation
+- Local time display
+- Devicon integration for tech stack display
+- Configurable region display for experiences
+- Subtle hyperlink indicators (SVGs)
+- Engaging criss-cross carousel animations
 
-<p align="center">
-  <kbd><img src="https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/screenshot.png" alt="Dark Noir Theme Screenshot" title="Dark Noir"/></kbd>
-</p>
+## Light & Dark Mode Showcase
 
-<p align="center">
-  <em>Homepage view with minimalist design and dark mode</em>
-</p>
+Here's a glimpse of the theme in both light and dark modes:
 
-<p align="center">
-  <kbd><img src="https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/tn.png" alt="Dark Noir Theme Thumbnail" title="Dark Noir Thumbnail"/></kbd>
-</p>
+**Light Mode:**
 
-<p align="center">
-  <em>Blog post view with optimal readability</em>
-</p>
+![Hugo Noir Light Mode](https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/home_light.png)
 
-<p align="center">
-  <kbd><img src="https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/contact.png" alt="Contact Page" title="Contact Page"/></kbd>
-</p>
+**Dark Mode (Primary Screenshot):**
 
-<p align="center">
-  <em>Contact page with social media links and clean layout</em>
-</p>
+![Hugo Noir Dark Mode](https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/screenshot.png)
 
-<p align="center">
-  <kbd><img src="https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/experience.png" alt="Experience Page" title="Experience Page"/></kbd>
-</p>
+## Installation
 
-<p align="center">
-  <em>Experience page showcasing professional background with statistics</em>
-</p>
+Ensure you have Hugo installed (Extended version, v0.92.0 or newer is recommended).
 
-<p align="center">
-  <kbd><img src="https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/project.png" alt="Projects Page" title="Projects Page"/></kbd>
-</p>
+For a quick start and to see a full configuration example, you can refer to the `hugo.example.toml` file included in the theme's root directory. You can copy this file to your site's root as `hugo.toml` (or `config.toml`) and customize it.
 
-<p align="center">
-  <em>Projects page displaying work with technology tags and descriptions</em>
-</p>
-
-<p align="center">
-  <kbd><img src="https://raw.githubusercontent.com/prxshetty/hugo-noir/main/images/blogs.png" alt="Blogs Page" title="Blogs Page"/></kbd>
-</p>
-
-<p align="center">
-  <em>Blogs page displaying blogs with tags and a short descriptions</em>
-</p>
-
----
-
-## Features 💥
-
-- **Clean Design**: Minimalist aesthetic for distraction-free reading
-- **Responsive Layout**: Perfect viewing experience across all devices
-- **Dark Mode Support**: Easy on the eyes, especially in low-light environments
-- **Tailwind CSS**: Modern utility-first CSS framework for styling
-- **Fast Performance**: Optimized for speed with minimal JavaScript
-- **SEO-Friendly**: Built with search engines in mind, including Open Graph tags
-- **Blog-Ready**: Perfect for personal blogs and portfolios
-- **No Dependencies**: No webpack, nodejs or other dependencies required to edit the theme
-- **Social Icons**: Easy configuration for social media links
-- **Custom Styling**: Simple customization through CSS variables
-- **Featured Content**: Support for featured posts on the homepage
-- **Tech Stack Carousel**: Showcase your skills with a smooth, interactive tech stack carousel
-- **Single Page Portfolio**: Everything in one place - about, experience, projects, and contact sections
-- **Inline SVGs**: Uses inline SVG icons for faster loading and better performance
-- **Mobile-First Design**: Fully optimized for mobile devices with touch-friendly interactions
-- **Local Clock**: Real-time clock display using minimal JavaScript for accurate time
-
----
-
-## Install/Update 📥
-
-### Option 1: Clone Repository
+### Option 1: Clone Repository (Recommended for theme development)
 
 ```bash
-# From your Hugo site directory
-git clone https://github.com/prxshetty/hugo-noir themes/hugo-noir
+# From your Hugo site's root directory
+git clone https://github.com/prxshetty/hugo-noir.git themes/hugo-noir
 ```
 
-### Option 2: Add as a Git Submodule
+### Option 2: Add as a Git Submodule (Recommended for using the theme in your project)
 
 ```bash
-# From your Hugo site directory
-git submodule add https://github.com/prxshetty/hugo-noir themes/hugo-noir
+# From your Hugo site's root directory
+git submodule add https://github.com/prxshetty/hugo-noir.git themes/hugo-noir
+```
+Then, update your submodules:
+```bash
+git submodule update --init --recursive
 ```
 
-Then, add the following to your site's `config.toml`:
+## Configuration
 
-```toml
-theme = "hugo-noir"
-```
+1.  **Set the theme in your site's `hugo.toml` (or `config.toml`):**
 
----
+    ```toml
+    theme = "hugo-noir"
+    ```
 
-## Requirements ⚙️
+2.  **Hugo Version Compatibility:**
 
-- Hugo Extended version
-- Minimum version: 0.92.0
+    This theme requires:
+    *   Hugo **Extended** version.
+    *   Minimum version: **0.92.0** (recommended).
 
----
+    To ensure compatibility, especially if you plan to submit this theme to the Hugo Themes showcase, you can specify Hugo version requirements within the theme's own `hugo.toml` or `config.toml` (create one at `themes/hugo-noir/hugo.toml` if it doesn't exist) or more commonly in a `theme.toml` file at the root of the theme.
 
-## Configuration ⚙️
+    Example for `themes/hugo-noir/theme.toml` (see "Theme Metadata" section below):
+    ```toml
+    [module]
+      [module.hugoVersion]
+        extended = true
+        min = "0.92.0"
+        # max = "0.1xx.x" # Optionally specify a max version
+    ```
 
-This theme supports a variety of configuration options in your `hugo.toml` (or `config.toml`) file. An example `hugo.toml` configuration can be found in `exampleSite/hugo.toml`. Below is an example configuration with explanations:
+3.  **Multilingual Setup (Optional):**
 
-### Basic Configuration
+    This theme is pre-configured for English (en), Spanish (es), and French (fr). To enable multilingual mode in your site, configure your main `hugo.toml` like this:
 
-```toml
-baseURL = "https://example.com"
-languageCode = 'en-us'
-title = 'Your Name'
-theme = 'hugo-noir'
+    ```toml
+    defaultContentLanguage = "en"
+    defaultContentLanguageInSubdir = true # Recommended for clearer URLs like /en/blog, /es/blog
 
-# URL handling
-relativeURLs = true
-canonifyURLs = true
+    [languages]
+      [languages.en]
+        languageName = "English"
+        title = "Your Site Title (English)"
+        weight = 1
+        contentDir = "content/en" # Ensure you have this directory
+        [languages.en.menu]
+          [[languages.en.menu.main]]
+            name = "About"
+            pageRef = "/about"
+            weight = 1
+          # ... other English menu items
+      [languages.es]
+        languageName = "Español"
+        title = "Your Site Title (Spanish)"
+        weight = 2
+        contentDir = "content/es" # Ensure you have this directory
+        [languages.es.menu]
+          [[languages.es.menu.main]]
+            name = "Sobre Mí" # Translated name
+            pageRef = "/about" # pageRef should ideally point to the same logical page
+            weight = 1
+          # ... other Spanish menu items
+      [languages.fr]
+        languageName = "Français"
+        title = "Your Site Title (French)"
+        weight = 3
+        contentDir = "content/fr" # Ensure you have this directory
+        [languages.fr.menu]
+          [[languages.fr.menu.main]]
+            name = "À Propos" # Translated name
+            pageRef = "/about"
+            weight = 1
+          # ... other French menu items
 
-# Taxonomy configuration
-[taxonomies]
-  category = "categories"
-  tag = "tags"
-```
+    # Remember to create content in the respective contentDir folders (e.g., content/en/about.md, content/es/about.md)
+    ```
+    The theme's `i18n` folder (`themes/hugo-noir/i18n/`) contains the translation strings.
 
-### Personal Information
+4.  **Params for `hugo.toml` (and Data Files):**
 
-```toml
-[params]
-name = "Your Name"
-location = "City, Country"
-description = "Your bio goes here..."
-profile_image = "/images/profile.jpg"
+    The theme uses parameters from your site's `hugo.toml` under `[params]` for common information like your name and social links. Ensure these are set. Example:
+    ```toml
+    [params]
+      name = "Your Name"
+      profile_image = "/images/your-profile.jpg" # Place in your site's static/images/
+      # Social links
+      github = "https://github.com/yourusername"
+      twitter = "https://twitter.com/yourusername"
+      linkedin = "https://linkedin.com/in/yourusername"
+      email = "your.email@example.com"
+      # ... other params ...
+    ```
 
-# Social Media Links
-github = "https://github.com/yourusername"
-email = "your.email@example.com"
-twitter = "https://twitter.com/yourusername"
-linkedin = "https://linkedin.com/in/yourusername"
-instagram = "https://instagram.com/yourusername"
-```
+    **Site-Specific Data (Author, Experience, etc.):**
 
-### Social Icons
+    For language-specific information like author details and your professional experience, this theme utilizes Hugo's data files. You should create these in your site's `data` directory, typically organized by language.
 
-You can configure social icons that appear in the footer:
+    *   **Author Information:** Create files like `data/en/author.yaml`, `data/es/author.yaml`. Example for `data/en/author.yaml`:
+        ```yaml
+        name: "Your Name (English)"
+        bio: "Your bio in English."
+        social:
+          github: "https://github.com/yourusername"
+          # ... other social links ...
+        ```
 
-```toml
-[params.socialIcons]
-github = "https://github.com/yourusername"
-twitter = "https://twitter.com/yourusername"
-linkedin = "https://linkedin.com/in/yourusername"
-instagram = "https://instagram.com/yourusername"
-email = "mailto:your.email@example.com"
-```
+    *   **Experience Data:** The "Experience" section on your site (using the `experience.html` layout) is populated from a data file. Create a file such as `data/en/experience.toml` (or `.yaml`/`.json`). Each entry should detail a role or position.
 
-### Experience Section
+        Example structure for an entry in `data/en/experience.toml`:
+        ```toml
+        [[experience]]
+          role = "Senior Developer"
+          company = "Tech Solutions Inc."
+          period = "Jan 2020 - Present"
+          country = "USA" # New field for region/country
+          # description = "Longer description of the role..." # Optional detailed description
+          responsibilities = [
+            "Developed and maintained web applications.",
+            "Collaborated with cross-functional teams.",
+            "Led junior developers."
+          ]
+          technologies = ["Go", "Docker", "Kubernetes", "React"]
+        
+        [[experience]]
+          role = "Software Engineer"
+          company = "Innovate LLC"
+          period = "Jun 2018 - Dec 2019"
+          country = "Canada"
+          responsibilities = [
+            "Contributed to full-stack development projects.",
+            "Participated in code reviews and agile sprints."
+          ]
+          technologies = ["Python", "Django", "PostgreSQL"]
+        ```
+        Ensure you have a similar file for each language you support (e.g., `data/es/experience.toml`). The `experience.html` layout in the theme will automatically pick up the data for the current language.
 
-```toml
-[[params.experience]]
-company = "Company Name"
-role = "Your Role"
-period = "Jan 2023 - Present"
-logo = "/images/company/logo.png"
-description = "Brief description of your role and responsibilities."
-responsibilities = [
-    "Responsibility 1 with specific achievements",
-    "Responsibility 2 with specific achievements",
-    "Responsibility 3 with specific achievements"
-]
+## Content Structure
 
-# For open source contributions
-[[params.experience]]
-company = "GitHub"
-role = "Open Source Contributor"
-period = "Jan 2023 - Present"
-description = "Contributing to open source projects"
-github_username = "yourusername"
-```
+The theme generally expects a standard Hugo content structure. For multilingual sites, organize content into language-specific subdirectories as defined in your `hugo.toml`'s `contentDir` for each language.
 
-### Projects Section
-
-```toml
-[[params.projects]]
-title = "Project Name"
-description = "Brief description of the project and what it does."
-tech = "Technologies used (e.g., Python, React, TensorFlow)"
-image = "/images/projects/project.png"
-link = "https://github.com/yourusername/project"
-```
-
-### Blog Posts
-
-```toml
-[[params.blogs]]
-title = "Blog Post Title"
-date = "2023-01-15"
-summary = "Brief summary of what the blog post is about."
-tags = ["tag1", "tag2", "tag3"]
-content = """
-Short excerpt or introduction to the blog post...
-"""
-link = "https://yourblog.com/post-url"
-```
-
-### Featured Content
-
-You can mark certain content as featured to display it prominently on the homepage:
-
-```toml
-[[params.blogs]]
-title = "Featured Blog Post"
-date = "2023-01-15"
-summary = "This post will be featured on the homepage."
-tags = ["tag1", "tag2", "tag3"]
-featured = true
-link = "https://yourblog.com/featured-post"
-```
-
-### Navigation Menu
-
-```toml
-[menu]
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
-    weight = 1
-  [[menu.main]]
-    name = "Experience"
-    url = "/experience/"
-    weight = 2
-  [[menu.main]]
-    name = "Projects"
-    url = "/projects/"
-    weight = 3
-  [[menu.main]]
-    name = "Blogs"
-    url = "/blogs/"
-    weight = 4
-  [[menu.main]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 5
-```
-
----
-
-## Content Structure 📁
-
-The theme expects the following content structure:
-
+Example:
 ```
 content/
-├── _index.md          # Homepage content
-├── about.md           # About page
-├── experience.md      # Experience page
-├── projects.md        # Projects page
-├── blog.md            # Blogs Page
-└── contact.md         # Contact page
+├── en/                 # English content
+│   ├── _index.md       # Homepage content for English
+│   ├── about.md
+│   ├── blogs/
+│   │   ├── _index.md
+│   │   └── my-first-blog.md
+│   └── projects/
+│       ├── _index.md
+│       └── project-a.md
+├── es/                 # Spanish content
+│   ├── _index.md       # Homepage content for Spanish
+│   ├── about.md
+│   └── blogs/
+│       ├── _index.md
+│       └── mi-primer-blog.md
+└── fr/                 # French content
+    ├── _index.md       # Homepage content for French
+    ├── about.md
+    └── blogs/
+        ├── _index.md
+        └── mon-premier-blog.md
 ```
 
-Each page can use front matter to customize its appearance and behavior.
-
----
-
-## Front Matter Examples 📝
+## Front Matter Examples
 
 ### Blog Post
 
 ```yaml
 ---
 title: "My First Post"
-date: 2023-03-15T10:30:00+05:30
+date: 2023-03-15T10:30:00+05:30 # Or your local timezone
 draft: false
 tags: ["hugo", "web development"]
 categories: ["tutorials"]
-description: "A detailed description of the post for SEO and previews"
-featured_image: "/images/post-cover.jpg"
-featured: false  # Set to true to feature this post on the homepage
+description: "A brief description of your post for SEO and previews."
+# For multilingual posts, ensure the filename is the same across languages
+# e.g., content/en/blogs/my-post.md and content/es/blogs/my-post.md
+# Hugo will link them as translations.
 ---
+
+Your post content here...
 ```
 
-### Static Page
+### Static Page (e.g., About, Contact)
 
 ```yaml
 ---
 title: "About Me"
 date: 2023-03-15T10:30:00+05:30
 draft: false
-menu: "main"
-description: "Learn more about me and my background"
+menu: "main" # Optional: if you want it to appear in the main menu configured in hugo.toml
+layout: "single" # Or specific layout if defined
+description: "A brief description of the page."
 ---
+
+Page content here...
 ```
 
----
+## Customization
 
-## Customization 🎨
+You can customize the theme:
 
-### Custom CSS
+-   **Override Templates:** Copy any template file from `themes/hugo-noir/layouts/` into your site's `layouts/` directory (maintaining the same subdirectory structure) and modify it.
+-   **Custom CSS:**
+    -   For minor CSS overrides, you can create `assets/css/custom.css` in your site's root. The theme will attempt to load this.
+    -   For more extensive changes, you might want to fork the theme or modify its Tailwind CSS configuration (`themes/hugo-noir/tailwind.config.js`) and rebuild the theme's CSS.
+-   **Static Assets:** Place your own static assets (images, fonts) in your site's `static/` directory.
+-   **Partials:** Override or extend partials found in `themes/hugo-noir/layouts/partials/` by creating files with the same name in your site's `layouts/partials/` directory.
 
-You can customize the theme by modifying the following files:
+## Theme Metadata (`theme.toml`) (for Hugo Themes Showcase)
 
-- `assets/css/custom.css`: Add your custom CSS styles here
-- `assets/css/variables.css`: Modify theme variables like colors and fonts
+For submission to themes.gohugo.io, your theme needs a `theme.toml` file in its root directory (`themes/hugo-noir/theme.toml`).
 
-## Custom Icons
+Example `themes/hugo-noir/theme.toml`:
+```toml
+name = "Hugo Noir"
+license = "MIT" # Or your chosen license
+licenselink = "https://github.com/prxshetty/hugo-noir/blob/main/LICENSE" # Link to the theme's license file
+description = "A clean, minimalistic, and multilingual theme for Hugo, focusing on readability and simplicity. Built with Tailwind CSS and offering dark mode."
+version = "2.0.0" # Theme version
 
-You can add custom icons to your site by using SVG icons. SVGs are preferred because they're lightweight, scalable, and render crisply on all devices without losing quality.
+homepage = "https://github.com/prxshetty/hugo-noir/" # Theme's source repository
+demosite = "" # URL to a live demo of your theme
 
-You can find free SVG icons at these popular sites:
-- [Font Awesome](https://fontawesome.com/)
-- [Feather Icons](https://feathericons.com/)
-- [Heroicons](https://heroicons.com/)
-- [Simple Icons](https://simpleicons.org/) (great for brand/tech stack icons)
-- [Devicon](https://devicon.dev/) (specifically for programming languages and tools)
+tags = ["blog", "minimal", "responsive", "dark mode", "tailwind", "multilingual", "personal", "portfolio"]
+features = ["dark mode", "multilingual", "tailwind css", "responsive", "contact form", "devicons"] # Key features
 
-I included it inline in the HTML for better performance and speed. 
+[author]
+  name = "John Doe" # Your name
+  homepage = "https://johndoe.com" # Your website
 
-Example of custom CSS:
+# If porting from another theme, add [original] section
+# [original]
+#   author = "Original Author Name"
+#   homepage = "Link to original theme's homepage"
+#   repo = "Link to original theme's repository"
 
-```css
-/* assets/css/custom.css */
-.site-header {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.post-title {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-}
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.92.0"
 ```
 
+## Contributing
 
-Example:
+Contributions are welcome! Please feel free to open an issue or submit a pull request.
 
-```javascript
-// assets/js/custom.js
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Custom JavaScript loaded');
-  
-  // Your custom code here
-});
-```
+## License
 
-### HTML Templates
+This theme is released under the MIT License. See the [LICENSE](https://github.com/prxshetty/hugo-noir/blob/main/LICENSE) file for details.
 
-For more advanced customization, you can override the theme's templates by creating your own versions in your site's `layouts` directory:
+## Credits
 
-- `layouts/_default/single.html`: Override the default single page template
-- `layouts/_default/list.html`: Override the default list template
-- `layouts/partials/header.html`: Override the header partial
-
----
-
-## FAQs 🙋
-
-Coming soon...
-
----
-
-## Performance ⚡
-
-Dark Noir is designed with performance in mind, ensuring fast loading times and a smooth user experience.
-
----
-
-## Support 🫶
-
-- Star 🌟 this repository
-- Share it with others who might find it useful
-- Report issues or suggest improvements
-
----
-
-## Special Thanks 🌟
-
-- [Hugo](https://gohugo.io/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- All contributors and supporters
-
----
-
-## License 📄
-
-This theme is released under the [MIT License](https://github.com/prxshetty/hugo-noir/blob/main/LICENSE). 
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/prxshetty/hugo-noir/blob/main/LICENSE) 
+-   [Hugo](https://gohugo.io/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+-   Devicons used in the theme are from [devicons/devicon](https://github.com/devicons/devicon). 

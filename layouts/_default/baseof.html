@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +11,22 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.BaseURL }}favicon_io/favicon-16x16.png">
         <link rel="manifest" href="{{ .Site.BaseURL }}favicon_io/site.webmanifest">        
         <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
-        <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" as="style">
-        
-        <!-- issues fix code for FOUC -->
+        <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" as="style">            
         <style>
             html, body {
-                background-color: #121212;
-                color: #f3f4f6;
-            }            
-            .border {
-                border-color: #374151;
-            }            
+                background-color: #FFFFFF; 
+                color: #1f2937; 
+            }
+            html.dark, html.dark body {
+                background-color: #121212; 
+                color: #f3f4f6; 
+            }
+            .border { 
+                border-color: #d4d4d8; 
+            }
+            html.dark .border {
+                border-color: #374151; 
+            }
             .carousel-item {
                 display: inline-block;
                 margin: 0 1rem;
@@ -53,7 +58,6 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
         <script>
-            // On page load or when changing themes, best to add inline in `head` to avoid FOUC
             if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
             } else {
@@ -62,13 +66,9 @@
         </script>
         <style>
             :root {
-                color-scheme: dark;
+                color-scheme: light dark;
             }
             
-            body {
-                @apply bg-[#121212] text-gray-100;
-            }
-
             .tech-icon {
                 filter: grayscale(100%) brightness(200%);
                 transition: all 0.3s ease;
@@ -105,7 +105,7 @@
             }
         </style>
     </head>
-    <body class="min-h-screen bg-[#121212] text-gray-100">
+    <body class="min-h-screen bg-bg-primary-light dark:bg-bg-primary-dark text-text-primary-light dark:text-text-primary-dark">
         {{ partial "header" . }}
         <main>
             {{ block "main" . }}{{ end }}

@@ -1,13 +1,13 @@
 {{ define "main" }}
 <div class="w-1/2 mx-auto py-12">
-    <div class="max-w-3xl mx-auto p-8 border border-gray-800 rounded-2xl bg-[#121212]">
-        <h1 class="text-4xl font-bold mb-4">{{ .Title }}</h1>
+    <div class="max-w-3xl mx-auto p-8 border border-border-primary-light dark:border-border-primary-dark rounded-2xl bg-neutral-50 dark:bg-neutral-800">
+        <h1 class="text-4xl font-bold mb-4 text-text-primary-light dark:text-text-primary-dark">{{ .Title }}</h1>
         {{ if eq .Section "blogs" }}
-            <div class="flex items-center gap-4 mb-8 text-gray-400">
+            <div class="flex items-center gap-4 mb-8 text-text-secondary-light dark:text-text-secondary-dark">
                 <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
                 <div class="flex gap-2">
                     {{ range .Params.tags }}
-                    <span class="px-2 py-1 bg-gray-800 rounded-md text-xs font-medium text-gray-300">{{ . }}</span>
+                    <span class="px-2 py-1 bg-bg-primary-light dark:bg-bg-tertiary-dark rounded-md text-xs font-medium text-text-secondary-light dark:text-text-secondary-dark">{{ . }}</span>
                     {{ end }}
                 </div>
             </div>
