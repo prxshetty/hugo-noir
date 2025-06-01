@@ -54,23 +54,25 @@
             <div class="bg-bg-primary-light dark:bg-bg-secondary-dark p-6 md:p-8 rounded-lg mb-8 border border-border-primary-light dark:border-border-primary-dark">
                 <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-text-primary-light dark:text-text-primary-dark">Voluntary Work</h2>
                 <div class="space-y-6">
+                    {{ range $authorData.voluntary }}
                     <div class="flex flex-col gap-2 p-4 rounded-lg bg-bg-primary-light dark:bg-bg-secondary-dark border border-border-primary-light dark:border-border-primary-dark transition-all duration-300">
                         <div class="text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark text-base">
-                            <a href="https://www.buntssanghamumbai.com/" target="_blank" class="animated-link inline-flex items-center gap-2">
-                                {{ $authorData.voluntary.organization }}
+                            <a href="{{ .url }}" target="_blank" class="animated-link inline-flex items-center gap-2">
+                                {{ .organization }}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 opacity-70 group-hover:opacity-100 transition-opacity duration-200">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
                             </a>
                         </div>
                         <div class="flex items-center gap-2">
-                            <h3 class="text-xl md:text-2xl font-semibold text-text-primary-light dark:text-text-primary-dark">{{ $authorData.voluntary.role }}</h3>
+                            <h3 class="text-xl md:text-2xl font-semibold text-text-primary-light dark:text-text-primary-dark">{{ .role }}</h3>
                         </div>
                         <div class="text-text-secondary-light dark:text-text-secondary-dark flex items-center gap-2 text-base prose">
-                            <span>{{ $authorData.voluntary.period }}</span>
+                            <span>{{ .period }}</span>
                         </div>
-                        <p class="text-text-secondary-light dark:text-text-secondary-dark text-base prose">{{ $authorData.voluntary.description }}</p>
+                        <p class="text-text-secondary-light dark:text-text-secondary-dark text-base prose">{{ .description }}</p>
                     </div>
+                    {{ end }}
                 </div>
             </div>
         </div>
