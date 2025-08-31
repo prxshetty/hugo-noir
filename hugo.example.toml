@@ -134,6 +134,7 @@ defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
     organization = "Local Charity Group"
     period = "2021 - Present"
     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    url = "https://example.com/community"
 
 # Main menu (used as a fallback if language-specific menus are not fully defined or if not using multilingual features)
 # For multilingual sites, it's generally better to define menus within each language block as shown above.
