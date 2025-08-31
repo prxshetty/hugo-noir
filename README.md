@@ -191,6 +191,26 @@ git submodule update --init --recursive
           email = "your.email@example.com"
           # ... other social links ...
         ```
+    *   **Tech Carousel:** Create a file like `data/en/tech.toml` to customize items on the tech stack carousel. The icon class pulls from [Devicon](https://devicon.dev/). Example `data/en/tech.toml`:
+        ```toml
+        # The 'row1' array populates the top carousel
+        row1 = [
+          { icon = "devicon-python-plain", name = "Python" },
+          { icon = "devicon-go-plain", name = "Go" },
+          { icon = "devicon-javascript-plain", name = "JavaScript" },
+          # ... other tech stack items...
+          { icon = "devicon-ruby-plain", name = "Ruby" }
+        ]
+
+        # The 'row2' array populates the bottom carousel
+        row2 = [
+          { icon = "devicon-docker-plain", name = "Docker" },
+          { icon = "devicon-postgresql-plain", name = "PostgreSQL" },
+          { icon = "devicon-nginx-original", name = "Nginx" },
+          # ... other tech stack items... 
+          { icon = "devicon-nodejs-plain", name = "Node.js" }
+        ]
+        ```
 
     *   **Experience Data:** The "Experience" section on your site (using the `experience.html` layout) is populated from a data file. Create a file such as `data/en/experience.toml` (or `.yaml`/`.json`). Each entry should detail a role or position.
 

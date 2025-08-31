@@ -110,6 +110,29 @@ defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
   # kaggle = "https://www.kaggle.com/johndoe"
   # instagram = "https://instagram.com/johndoe"
 
+  # Example for adding items to the tech stack carousel
+  [params.tech]
+  row1 = [
+    { icon = "devicon-python-plain", name = "Python" },
+    { icon = "devicon-go-plain", name = "Go" },
+    { icon = "devicon-javascript-plain", name = "JavaScript" },
+    { icon = "devicon-typescript-plain", name = "TypeScript" },
+    { icon = "devicon-react-original", name = "React" },
+    { icon = "devicon-vuejs-plain", name = "Vue.js" },
+    { icon = "devicon-html5-plain", name = "HTML5" },
+    { icon = "devicon-css3-plain", name = "CSS3" }
+  ]
+  row2 = [
+    { icon = "devicon-docker-plain", name = "Docker" },
+    { icon = "devicon-kubernetes-plain", name = "Kubernetes" },
+    { icon = "devicon-nginx-original", name = "Nginx" },
+    { icon = "devicon-postgresql-plain", name = "PostgreSQL" },
+    { icon = "devicon-redis-plain", name = "Redis" },
+    { icon = "devicon-git-plain", name = "Git" },
+    { icon = "devicon-hugo-plain", name = "Hugo" },
+    { icon = "devicon-tailwindcss-plain", name = "TailwindCSS" }
+  ]
+
   # Example for adding honors/awards (optional, adapt to theme features)
   [[params.honors]]
     institution = "Lorem University"
