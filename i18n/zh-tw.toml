@@ -4,6 +4,15 @@ other = "我使用的技術"
 [experienceTitle]
 other = "經驗"
 
+[voluntaryTitle]
+other = "志願服務"
+
+[certificationsTitle]
+other = "證照"
+
+[honorsTitle]
+other = "榮譽獎項"
+
 [projectsTitle]
 other = "專案"
 

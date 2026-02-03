@@ -133,6 +133,28 @@
     {{ warnf "No experience data found for language %q. Please define either data/%s/experience.(yaml|toml|json) or params.experience in config." .Language.Lang .Language.Lang }}
     {{ end }}
 
+    <!-- Voluntary Section -->
+    {{ $voluntaryData := index site.Data .Language.Lang "voluntary" }}
+    {{ $voluntary := cond (and $voluntaryData $voluntaryData.voluntary) $voluntaryData.voluntary site.Params.voluntary }}
+    
+    {{ with $voluntary }}
+    <section class="mt-20">
+        <h2 class="text-4xl font-bold mb-5">{{ T "voluntaryTitle" }}</h2>
+        <div class="space-y-4 max-w-3xl mx-auto">
+            {{ range $index, $vol := . }}
+            <div class="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:w-[2px] before:h-full before:bg-gray-700 before:rounded-full">
+                <div class="absolute -left-1.5 top-0 w-2 h-2 bg-gray-700 rounded-full"></div>
+                
+                <div class="text-gray-400 text-xl mb-1">{{ .organization }}</div>
+                <p class="text-2xl font-semibold">{{ .role }}</p>
+                <p class="text-gray-400 font-semibold">{{ .period }}</p>
+                <p class="mt-2">{{ .description }}</p>
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
     <!-- Projects Section -->
     {{ $projectsData := index site.Data .Language.Lang "projects" }}
     {{ $projects := cond (and $projectsData $projectsData.projects) $projectsData.projects site.Params.projects }}
@@ -180,6 +202,65 @@
     {{ else }}
     {{ warnf "No project data found for language %q. Please define either data/%s/projects.(yaml|toml|json) or params.projects in config." .Language.Lang .Language.Lang }}
     {{ end }}
+
+    <!-- Honors & Certifications -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20 mb-20 max-w-3xl mx-auto">
+        <!-- Honors Section -->
+        {{ $honorsData := index site.Data .Language.Lang "honors" }}
+        {{ $honors := cond (and $honorsData $honorsData.honors) $honorsData.honors site.Params.honors }}
+        
+        {{ with $honors }}
+        <section>
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-light dark:text-accent-dark"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                {{ T "honorsTitle" }}
+            </h2>
+            <div class="space-y-6">
+                {{ range . }}
+                <div class="pl-4 border-l-2 border-gray-700 hover:border-accent-light dark:hover:border-accent-dark transition-colors duration-300">
+                    <h3 class="text-xl font-bold">{{ .title }}</h3>
+                    <p class="text-gray-400 text-sm mb-1">{{ .institution }}</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider">{{ .date }}</p>
+                    {{ if .description }}
+                    <p class="text-gray-400 mt-2 text-sm">{{ .description }}</p>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+
+        <!-- Certifications Section -->
+        {{ $certificationsData := index site.Data .Language.Lang "certifications" }}
+        {{ $certifications := cond (and $certificationsData $certificationsData.certifications) $certificationsData.certifications site.Params.certifications }}
+        
+        {{ with $certifications }}
+        <section>
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-light dark:text-accent-dark"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                {{ T "certificationsTitle" }}
+            </h2>
+            <div class="space-y-6">
+                {{ range . }}
+                <div class="pl-4 border-l-2 border-gray-700 hover:border-accent-light dark:hover:border-accent-dark transition-colors duration-300">
+                    <h3 class="text-xl font-bold flex items-center gap-2">
+                        {{ .title }}
+                        {{ if .url }}
+                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                        {{ end }}
+                    </h3>
+                    {{ if .issuer }}
+                    <p class="text-gray-400 text-sm mb-1">{{ .issuer }}</p>
+                    {{ end }}
+                    <p class="text-gray-500 text-xs uppercase tracking-wider">{{ .date }}</p>
+                </div>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+    </div>
 
     <!-- Blog Section -->
     {{ $blogsData := index site.Data .Language.Lang "blogs" }}
