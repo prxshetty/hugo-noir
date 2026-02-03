@@ -3,15 +3,11 @@
     <div class="max-w-3xl mx-auto">
         <div class="border-t border-border-primary-light dark:border-border-primary-dark pt-5">
             <div class="flex flex-col items-center justify-center gap-2">
-                {{ $authorData := index site.Data .Language.Lang "author" }}
+                {{ $authorData := index site.Data .Language.Lang "author" }}                
                 {{ $author := cond (and $authorData $authorData.author) $authorData.author site.Params }}
                 {{ with $author }}
-                <p class="text-text-secondary-light dark:text-text-secondary-dark text-xm ">© {{ now.Format "2006" }} {{
-                    .name }}</p>
-                <p class="text-text-secondary-light dark:text-text-secondary-dark text-xm pb-12">Want a portfolio like
-                    this? Use the <a href="https://themes.gohugo.io/themes/hugo-noir/" target="_blank"
-                        class="animated-link text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark">Hugo
-                        Noir</a> theme.</p>
+                <p class="text-text-secondary-light dark:text-text-secondary-dark text-xm ">© {{ now.Format "2006" }} {{ .name }}</p>
+                <p class="text-text-secondary-light dark:text-text-secondary-dark text-xm pb-12">{{ T "builtUsing" }} <a href="https://gohugo.io/" target="_blank" class="animated-link text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark">Hugo</a>. {{ T "takeALookAtMy" }} <a href="{{ .github }}" target="_blank" class="animated-link text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark">GitHub</a></p>
                 {{ end }}
             </div>
         </div>
@@ -24,7 +20,7 @@
         display: inline-flex;
         align-items: center;
     }
-
+    
     .animated-link::after {
         content: '';
         position: absolute;
@@ -32,17 +28,14 @@
         height: 1px;
         bottom: -1px;
         left: 0;
-        background-color: #0284c7;
-        /* accent-light (sky-600) */
+        background-color: #0284c7; /* accent-light (sky-600) */
         transition: width 0.3s ease-in-out;
     }
-
+    
     .animated-link:hover::after {
         width: 100%;
     }
-
     html.dark .animated-link::after {
-        background-color: #0ea5e9;
-        /* accent-dark (sky-500) */
+        background-color: #0ea5e9; /* accent-dark (sky-500) */
     }
-</style>
+</style> 
