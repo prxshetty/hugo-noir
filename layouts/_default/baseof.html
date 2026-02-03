@@ -1,115 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
-        
-        <!-- Favicon here-->
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.BaseURL }}favicon_io/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.BaseURL }}favicon_io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.BaseURL }}favicon_io/favicon-16x16.png">
-        <link rel="manifest" href="{{ .Site.BaseURL }}favicon_io/site.webmanifest">        
-        <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
-        <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" as="style">            
-        <style>
-            html, body {
-                background-color: #FFFFFF; 
-                color: #1f2937; 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+
+    <!-- Favicon here-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.BaseURL }}favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.BaseURL }}favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.BaseURL }}favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="{{ .Site.BaseURL }}favicon_io/site.webmanifest">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" as="style">
+    <style>
+        html,
+        body {
+            background-color: #FFFFFF;
+            color: #1f2937;
+        }
+
+        html.dark,
+        html.dark body {
+            background-color: #121212;
+            color: #f3f4f6;
+        }
+
+        .border {
+            border-color: #d4d4d8;
+        }
+
+        html.dark .border {
+            border-color: #374151;
+        }
+
+        .carousel-item {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .md\:flex-row {
+                flex-direction: row;
             }
-            html.dark, html.dark body {
-                background-color: #121212; 
-                color: #f3f4f6; 
+        }
+
+        .tech-carousel {
+            overflow: hidden;
+            width: 100%;
+            padding: 1rem 0;
+        }
+
+        .carousel-track {
+            white-space: nowrap;
+        }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+
+        .tech-icon {
+            filter: grayscale(100%) brightness(200%);
+            transition: all 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            filter: none;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
             }
-            .border { 
-                border-color: #d4d4d8; 
+
+            100% {
+                transform: translateX(-100%);
             }
-            html.dark .border {
-                border-color: #374151; 
-            }
-            .carousel-item {
-                display: inline-block;
-                margin: 0 1rem;
-            }            
-            .flex {
-                display: flex;
-            }
-            .flex-col {
-                flex-direction: column;
-            }
-            
-            @media (min-width: 768px) {
-                .md\:flex-row {
-                    flex-direction: row;
-                }
-            }
-            
-            .tech-carousel {
-                overflow: hidden;
-                width: 100%;
-                padding: 1rem 0;
-            }
-            
-            .carousel-track {
-                white-space: nowrap;
-            }
-        </style>
-        
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-        <script>
-            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        </script>
-        <style>
-            :root {
-                color-scheme: light dark;
-            }
-            
-            .tech-icon {
-                filter: grayscale(100%) brightness(200%);
-                transition: all 0.3s ease;
-            }
-            .tech-icon:hover {
-                filter: none;
-            }
-            
-            @keyframes scroll {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(-100%);
-                }
-            }
-            
-            .tech-carousel {
-                width: 100%;
-                padding: 1rem 0;
-            }
-            
-            .tech-track {
-                width: fit-content;
-                animation: scroll 20s linear infinite;
-            }
-            
-            .tech-track:hover {
-                animation-play-state: paused;
-            }
-            
-            .tech-slide {
-                float: left;
-            }
-        </style>
-    </head>
-    <body class="min-h-screen bg-bg-primary-light dark:bg-bg-primary-dark text-text-primary-light dark:text-text-primary-dark">
-        {{ partial "header" . }}
-        <main>
-            {{ block "main" . }}{{ end }}
-        </main>
-        {{ partial "footer" . }}
-    </body>
-</html> 
+        }
+
+        .tech-carousel {
+            width: 100%;
+            padding: 1rem 0;
+        }
+
+        .tech-track {
+            width: fit-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        .tech-track:hover {
+            animation-play-state: paused;
+        }
+
+        .tech-slide {
+            float: left;
+        }
+
+        .flex-grow {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col bg-bg-primary-light dark:bg-bg-primary-dark text-text-primary-light dark:text-text-primary-dark">
+    {{ partial "header" . }}
+    <main class="flex-grow">
+        {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer" . }}
+</body>
+
+</html>
